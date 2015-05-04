@@ -84,6 +84,7 @@ public class ViewSwatches extends ActionBarActivity {
         TextView v = new TextView(c);
         v.setText(s.getName());
         v.setBackgroundColor(s.getColor());
+        v.setTextColor(getResources().getColor(R.color.white));
         v.setGravity(Gravity.CENTER);
         v.setShadowLayer(12f, 0f, 0f, R.color.black);
         v.setTypeface(tf);
