@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 
 public class ViewSwatches extends ActionBarActivity {
+    public static String SWATCHES = "dk.lemonmelon.swatches.ViewSwatches.SWATCHES";
+
     private Swatch[] swatches = new Swatch[] {
         new Swatch(46, 204, 113),
         new Swatch(39, 174, 96),
