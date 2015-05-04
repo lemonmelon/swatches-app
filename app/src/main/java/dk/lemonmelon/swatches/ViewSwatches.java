@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
@@ -22,23 +23,15 @@ import android.widget.Toast;
 public class ViewSwatches extends Activity {
     public static String SWATCHES = "dk.lemonmelon.swatches.ViewSwatches.SWATCHES";
 
-    private Swatch[] swatches = new Swatch[] {
-        new Swatch(46, 204, 113),
-        new Swatch(39, 174, 96),
-        new Swatch(241, 196, 15),
-        new Swatch(243, 156, 18),
-        new Swatch(231, 76, 60),
-        new Swatch(236, 240, 241),
-        new Swatch(189, 195, 199),
-        new Swatch(149, 165, 166),
-        new Swatch(127, 140, 141)
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         final Context context = getApplicationContext();
+
+        Intent creatingIntent = getIntent();
+        String swatchesData = creatingIntent.getStringExtra(SWATCHES);
+        Swatch[] swatches = parseSwatchData(swatchesData);
 
         View[] swatchRows = buildSwatchView(swatches, context);
 
@@ -58,6 +51,28 @@ public class ViewSwatches extends Activity {
                 //TODO: find next swatch
             }
         });
+    }
+
+    private Swatch[] parseSwatchData(String data) {
+        String[] swatchDataSets = data.split("\n");
+
+        //For now, we only handle the first data set.
+        //This should be fixed in the future.
+        String[] swatchDatas = swatchDataSets[0].split(";");
+        Swatch[] swatches = new Swatch[swatchDatas.length];
+        for(int i = 0; i < swatchDatas.length; i++) {
+            swatches[i] = parseSingleSwatchData(swatchDatas[i]);
+        }
+        return swatches;
+    }
+
+    private Swatch parseSingleSwatchData(String data) {
+        String[] colors = data.split(",");
+        int r = Integer.parseInt(colors[0]);
+        int g = Integer.parseInt(colors[1]);
+        int b = Integer.parseInt(colors[2]);
+
+        return new Swatch(r, g, b);
     }
 
     private View[] buildSwatchView(Swatch[] swatches, Context c) {
