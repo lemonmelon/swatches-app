@@ -1,5 +1,7 @@
 package dk.lemonmelon.swatches;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -85,6 +87,19 @@ public class ViewSwatches extends ActionBarActivity {
         v.setGravity(Gravity.CENTER);
         v.setShadowLayer(12f, 0f, 0f, R.color.black);
         v.setTypeface(tf);
+
+        final Context context = c;
+        final Swatch swatch = s;
+
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager clipboard = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Color from Swatches", "rgb" + swatch.getName());
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(context, "Copied to Clipboard", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return v;
     }
