@@ -54,6 +54,7 @@ public class ViewSwatches extends Activity {
     }
 
     private Swatch[] parseSwatchData(String data) {
+        data = data.replaceAll("\r", "");
         String[] swatchDataSets = data.split("\n");
 
         //For now, we only handle the first data set.
