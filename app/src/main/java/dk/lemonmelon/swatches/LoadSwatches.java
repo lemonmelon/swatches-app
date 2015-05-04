@@ -9,7 +9,6 @@ import android.view.MenuItem;
 
 
 public class LoadSwatches extends Activity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
