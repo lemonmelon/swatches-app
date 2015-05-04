@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
 
 public class LoadSwatches extends Activity {
     @Override
@@ -15,7 +19,14 @@ public class LoadSwatches extends Activity {
         setContentView(R.layout.activity_load_swatches);
 
         Intent goToViewSwatches = new Intent(this, ViewSwatches.class);
-        goToViewSwatches.putExtra(ViewSwatches.SWATCHES, "46,204,113;39,174,96;241,196,15;243,156,18;231,76,60;236,240,241;189,195,199;149,165,166;127,140,141\n");
+        String defaultSwatchSetData = readDefaultSwatchSet();
+        goToViewSwatches.putExtra(ViewSwatches.SWATCHES, defaultSwatchSetData);
         startActivity(goToViewSwatches);
+    }
+
+    private String readDefaultSwatchSet() {
+        InputStream is = this.getResources().openRawResource(R.raw.first_swatch);
+        Scanner scanner = new Scanner(is).useDelimiter("\\A");
+        return scanner.hasNext() ? scanner.next() : "";
     }
 }
