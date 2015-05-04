@@ -1,5 +1,6 @@
 package dk.lemonmelon.swatches;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -18,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class ViewSwatches extends ActionBarActivity {
+public class ViewSwatches extends Activity {
     public static String SWATCHES = "dk.lemonmelon.swatches.ViewSwatches.SWATCHES";
 
     private Swatch[] swatches = new Swatch[] {
