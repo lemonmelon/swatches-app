@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class ViewSwatches extends ActionBarActivity {
@@ -32,7 +33,9 @@ public class ViewSwatches extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        View[] swatchRows = buildSwatchView(swatches, getApplicationContext());
+        final Context context = getApplicationContext();
+
+        View[] swatchRows = buildSwatchView(swatches, context);
 
         setContentView(R.layout.activity_view_swatches);
 
@@ -41,6 +44,15 @@ public class ViewSwatches extends ActionBarActivity {
         for(View row : swatchRows) {
             swatchContainer.addView(row, swatchRowParams);
         }
+
+        View nextSwatchButton = findViewById(R.id.next_swatch_button);
+        nextSwatchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Click event not implemented yet", Toast.LENGTH_SHORT).show();
+                //TODO: find next swatch
+            }
+        });
     }
 
     private View[] buildSwatchView(Swatch[] swatches, Context c) {
